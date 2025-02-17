@@ -1,0 +1,4 @@
+
+
+def emotion_detector():
+    
