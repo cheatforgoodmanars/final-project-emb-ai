@@ -1,4 +1,0 @@
-
-
-def emotion_detector():
-    
