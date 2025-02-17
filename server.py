@@ -1,3 +1,12 @@
+"""
+Flask server for Emotion Detection API.
+
+This script sets up a Flask web application that:
+- Accepts text input from users via an HTML interface
+- Calls the `emotion_detector` function to analyze emotions in the text
+- Returns the detected emotions as a response
+"""
+# Import Flask, render_template, request from the flask pramework package
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -9,7 +18,6 @@ def emot_detector():
         runs emotion detection over it using emotion_detection()
         function.
     '''
-    
     text_to_analyse = request.args.get('textToAnalyze')
 
     response = emotion_detector(text_to_analyse)
@@ -25,7 +33,11 @@ def emot_detector():
         return "Invalid input! Try again."
 
     #return response
-    return f"for the given statement, the system response is 'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy}, and 'sadness': {sadness}. Then dominant emotion is {dominant_emotion}." 
+    return (
+        f"For the given statement, the system response is 'anger': {anger}, 'disgust': {disgust}, "
+        f"'fear': {fear}, 'joy': {joy}, and 'sadness': {sadness}. "
+        f"The dominant emotion is {dominant_emotion}."
+    )
 
 
 @app.route("/")
@@ -36,6 +48,4 @@ def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    ''' This functions executes the flask app and deploys it on localhost:5000
-    '''    
     app.run(host="0.0.0.0", port=5000)
